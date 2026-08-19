@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Portfolio of Maria Vittoria Colombo, a product designer specializing in creative production, project management, material research and installation design.">
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/icons/favicon-32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="assets/icons/favicon-16.png">
+  <link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.png">
+  <title>Maria Vittoria Colombo — Portfolio</title>
+  <link rel="stylesheet" href="style.css?v=39">
+</head>
+<body>
+
+  <!-- Homepage definitiva: un'unica finestra Paint che è insieme
+       header, navigazione, bacheca progetti e palette colori — non
+       più elementi separati (niente site-header o filter-bar fuori
+       dalla finestra: sulle altre pagine restano invece com'erano). -->
+  <main class="canvas-wrap" id="canvasWrap">
+
+    <section class="home-hero" id="homeHero">
+      <div class="paint-app">
+        <div class="win-titlebar hero-titlebar">
+          <h1 class="win-title">Maria Vittoria Colombo</h1>
+          <span class="win-controls"><span></span><span></span><span></span></span>
+        </div>
+
+        <!-- Barra dei filtri stile "menu bar" retro, integrata nella
+             finestra. Ogni voce porta alla pagina archivio di quella
+             categoria (category.html?cat=...), con la lista dei
+             progetti a sinistra e il contenuto a destra. -->
+        <div class="filter-bar" id="filterBar">
+          <a href="category.html?cat=production"><u>P</u>roduction</a>
+          <a href="category.html?cat=material-research"><u>M</u>aterial Research</a>
+          <a href="category.html?cat=product">Pro<u>d</u>uct</a>
+          <a href="category.html?cat=workshop"><u>W</u>orkshop</a>
+          <a href="category.html?cat=photography"><u>P</u>hotography</a>
+          <a href="about.html"><u>A</u>bout</a>
+        </div>
+
+        <div class="paint-body">
+          <!-- toolbar riusata come navigazione a miniature: ogni
+               pulsante è la foto reale di un progetto -->
+          <div class="paint-toolbar" id="thumbNav">
+          <button type="button" class="thumb-nav-item" data-slug="naked-space-fever" title="Naked Space × Fever">
+            <img src="assets/img/naked-space-fever/principale.jpg" alt="">
+          </button>
+          <button type="button" class="thumb-nav-item" data-slug="naked-space-nike" title="Naked Space × NIKE">
+            <img src="assets/img/naked-space-nike/principale.jpg" alt="">
+          </button>
+          <button type="button" class="thumb-nav-item" data-slug="institutional-trip-senegal" title="Institutional Trip, Senegal">
+            <img src="assets/img/institutional-trip-senegal/principale.jpg" alt="">
+          </button>
+          <button type="button" class="thumb-nav-item" data-slug="music-video-abhir" title="Music Video — Abhir">
+            <img src="assets/img/music-video-abhir/principale.jpg" alt="">
+          </button>
+          <button type="button" class="thumb-nav-item" data-slug="mdef-festival" title="MDEF Festival">
+            <img src="assets/img/mdef-festival/principale.jpg" alt="">
+          </button>
+          <button type="button" class="thumb-nav-item" data-slug="francesca-romana-vanti" title="Francesca Romana Vanti">
+            <img src="assets/img/francesca-romana-vanti/principale.jpg" alt="">
+          </button>
+          <button type="button" class="thumb-nav-item" data-slug="material-dialogue" title="Material Dialogue">
+            <img src="assets/img/material-dialogue/principale.jpg" alt="">
+          </button>
+          <button type="button" class="thumb-nav-item" data-slug="b612" title="B612">
+            <img src="assets/img/b612/principale.jpg" alt="">
+          </button>
+          <button type="button" class="thumb-nav-item" data-slug="rhea" title="Rhea">
+            <img src="assets/img/rhea/principale.jpg" alt="">
+          </button>
+          <button type="button" class="thumb-nav-item" data-slug="bone" title="Bone">
+            <img src="assets/img/bone/principale.jpg" alt="">
+          </button>
+          <button type="button" class="thumb-nav-item" data-slug="fungicharm-workshop" title="Fungicharm Workshop">
+            <img src="assets/img/fungicharm-workshop/principale.jpg" alt="">
+          </button>
+          <button type="button" class="thumb-nav-item" data-slug="workshop-mdeffest" title="Workshop MDEF Fest">
+            <img src="assets/img/workshop-mdeffest/principale.jpg" alt="">
+          </button>
+          <button type="button" class="thumb-nav-item" data-slug="s2026" title="S2026">
+            <img src="assets/img/s2026/principale.jpg" alt="">
+          </button>
+          </div>
+          <!-- canvas: contiene la foto attiva che rimbalza come un DVD
+               (script.js sposta/alterna i .project-block qui dentro) -->
+          <div class="paint-canvas" id="paintCanvas">
+            <div class="canvas" id="canvas">
+
+
+      <a href="category.html?cat=production&project=naked-space-fever" class="project-block" draggable="false" data-category="production" data-year="2026" style="left:40px; top:160px; transform:rotate(-5deg);">
+        <div class="win-titlebar">
+          <span class="win-title">Naked Space × Fever</span>
+          <span class="win-controls"><span></span><span></span><span></span></span>
+        </div>
+        <img class="swatch" src="assets/img/naked-space-fever/principale.jpg" alt="Naked Space × Fever" style="width:260px; height:190px;">
+      </a>
+
+      <a href="category.html?cat=production&project=naked-space-nike" class="project-block" draggable="false" data-category="production" data-year="2026" style="left:340px; top:200px; transform:rotate(4deg);">
+        <div class="win-titlebar">
+          <span class="win-title">Naked Space × NIKE</span>
+          <span class="win-controls"><span></span><span></span><span></span></span>
+        </div>
+        <img class="swatch" src="assets/img/naked-space-nike/principale.jpg" alt="Naked Space × NIKE" style="width:240px; height:170px;">
+      </a>
+
+      <a href="category.html?cat=production&project=institutional-trip-senegal" class="project-block" draggable="false" data-category="production" data-year="2026" style="left:60px; top:420px; transform:rotate(-3deg);">
+        <div class="win-titlebar">
+          <span class="win-title">Institutional Trip, Senegal</span>
+          <span class="win-controls"><span></span><span></span><span></span></span>
+        </div>
+        <img class="swatch" src="assets/img/institutional-trip-senegal/principale.jpg" alt="Institutional Trip, Senegal" style="width:220px; height:280px;">
+      </a>
+
+      <a href="category.html?cat=production&project=music-video-abhir" class="project-block" draggable="false" data-category="production" data-year="2026" style="left:600px; top:150px; transform:rotate(3deg);">
+        <div class="win-titlebar">
+          <span class="win-title">Music Video — Abhir</span>
+          <span class="win-controls"><span></span><span></span><span></span></span>
+        </div>
+        <img class="swatch" src="assets/img/music-video-abhir/principale.jpg" alt="Music Video — Abhir" style="width:260px; height:180px;">
+      </a>
+
+      <a href="category.html?cat=production&project=mdef-festival" class="project-block" draggable="false" data-category="production" data-year="2025" style="left:340px; top:450px; transform:rotate(-4deg);">
+        <div class="win-titlebar">
+          <span class="win-title">MDEF Festival</span>
+          <span class="win-controls"><span></span><span></span><span></span></span>
+        </div>
+        <img class="swatch" src="assets/img/mdef-festival/principale.jpg" alt="MDEF Festival" style="width:240px; height:170px;">
+      </a>
+
+      <a href="category.html?cat=product&project=francesca-romana-vanti" class="project-block" draggable="false" data-category="product" data-year="2023–2024" style="left:900px; top:180px; transform:rotate(5deg);">
+        <div class="win-titlebar">
+          <span class="win-title">Francesca Romana Vanti</span>
+          <span class="win-controls"><span></span><span></span><span></span></span>
+        </div>
+        <img class="swatch" src="assets/img/francesca-romana-vanti/principale.jpg" alt="Francesca Romana Vanti" style="width:220px; height:280px;">
+      </a>
+
+      <a href="category.html?cat=material-research&project=material-dialogue" class="project-block" draggable="false" data-category="material-research" data-year="2025" style="left:1150px; top:150px; transform:rotate(-2deg);">
+        <div class="win-titlebar">
+          <span class="win-title">Material Dialogue</span>
+          <span class="win-controls"><span></span><span></span><span></span></span>
+        </div>
+        <img class="swatch" src="assets/img/material-dialogue/principale.jpg" alt="Material Dialogue" style="width:260px; height:190px;">
+      </a>
+
+      <a href="category.html?cat=material-research&project=b612" class="project-block" draggable="false" data-category="material-research" data-year="2024" style="left:620px; top:480px; transform:rotate(2deg);">
+        <div class="win-titlebar">
+          <span class="win-title">B612</span>
+          <span class="win-controls"><span></span><span></span><span></span></span>
+        </div>
+        <img class="swatch" src="assets/img/b612/principale.jpg" alt="B612" style="width:220px; height:170px;">
+      </a>
+
+      <a href="category.html?cat=product&project=rhea" class="project-block" draggable="false" data-category="product" data-year="2023" style="left:900px; top:500px; transform:rotate(-6deg);">
+        <div class="win-titlebar">
+          <span class="win-title">Rhea</span>
+          <span class="win-controls"><span></span><span></span><span></span></span>
+        </div>
+        <img class="swatch" src="assets/img/rhea/principale.jpg" alt="Rhea" style="width:200px; height:260px;">
+      </a>
+
+      <a href="category.html?cat=product&project=bone" class="project-block" draggable="false" data-category="product" data-year="2022" style="left:1180px; top:420px; transform:rotate(3deg);">
+        <div class="win-titlebar">
+          <span class="win-title">Bone</span>
+          <span class="win-controls"><span></span><span></span><span></span></span>
+        </div>
+        <img class="swatch" src="assets/img/bone/principale.jpg" alt="Bone" style="width:240px; height:180px;">
+      </a>
+
+      <a href="category.html?cat=workshop&project=fungicharm-workshop" class="project-block" draggable="false" data-category="workshop" data-year="2025" style="left:1350px; top:480px; transform:rotate(-4deg);">
+        <div class="win-titlebar">
+          <span class="win-title">Fungicharm Workshop</span>
+          <span class="win-controls"><span></span><span></span><span></span></span>
+        </div>
+        <img class="swatch" src="assets/img/fungicharm-workshop/principale.jpg" alt="Fungicharm Workshop" style="width:230px; height:230px;">
+      </a>
+
+      <a href="category.html?cat=workshop&project=workshop-mdeffest" class="project-block" draggable="false" data-category="workshop" data-year="2025" style="left:60px; top:700px; transform:rotate(3deg);">
+        <div class="win-titlebar">
+          <span class="win-title">Workshop MDEF Fest</span>
+          <span class="win-controls"><span></span><span></span><span></span></span>
+        </div>
+        <img class="swatch" src="assets/img/workshop-mdeffest/principale.jpg" alt="Workshop MDEF Fest" style="width:250px; height:190px;">
+      </a>
+
+      <a href="category.html?cat=photography&project=s2026" class="project-block" draggable="false" data-category="photography" data-year="2026" style="left:700px; top:620px; transform:rotate(-3deg);">
+        <div class="win-titlebar">
+          <span class="win-title">S2026</span>
+          <span class="win-controls"><span></span><span></span><span></span></span>
+        </div>
+        <img class="swatch" src="assets/img/s2026/principale.jpg" alt="S2026" style="width:230px; height:300px;">
+      </a>
+
+            </div>
+          </div>
+        </div>
+        <div class="paint-statusbar">
+          <button type="button" id="resetAccentBtn" class="paint-color-label" title="Torna al cambio colore automatico">Click to change color</button>
+        </div>
+        <!-- palette sempre visibile, popolata da script.js -->
+        <div class="paint-palette" id="paintPalette"></div>
+      </div>
+    </section>
+  </main>
+
+  <script src="script.js?v=33"></script>
+</body>
+</html>

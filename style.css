@@ -1,0 +1,1109 @@
+/* ============================================
+   ACCENT COLOR — impostato dalla palette Paint (script.js)
+   Titlebar, evidenziazioni e link nella lista usano queste
+   variabili invece di un blu fisso, così la palette li
+   ricolora davvero in tempo reale.
+   ============================================ */
+:root {
+  /* default: giallo, finché l'utente non sceglie un altro colore
+     dalla palette (script.js applica poi lo stesso identico calcolo) */
+  --accent-start: #FFF200;
+  --accent-end: #FFF759;
+  --accent-solid: #8C8500;
+}
+
+/* ============================================
+   FONT — PP Lettra Mono
+   Solo due pesi disponibili (Medium e Ultralight, ciascuno
+   anche in corsivo): niente "Regular", quindi per i titoli
+   in corsivo usiamo Ultralight Italic, il più vicino a un
+   peso "regular". Il testo normale usa Medium.
+   ============================================ */
+@font-face {
+  font-family: "PP Lettra Mono";
+  src: url("assets/fonts/PPLettraMono-Medium.otf") format("opentype");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "PP Lettra Mono";
+  src: url("assets/fonts/PPLettraMono-MediumItalic.otf") format("opentype");
+  font-weight: 500;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "PP Lettra Mono";
+  src: url("assets/fonts/PPLettraMono-Ultralight.otf") format("opentype");
+  font-weight: 200;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "PP Lettra Mono";
+  src: url("assets/fonts/PPLettraMono-UltralightItalic.otf") format("opentype");
+  font-weight: 200;
+  font-style: italic;
+  font-display: swap;
+}
+
+/* ============================================
+   RESET & BASE
+   Azzeriamo gli stili di default del browser
+   così partiamo da una tela pulita.
+   ============================================ */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-font-smoothing: antialiased;
+}
+
+body {
+  font-family: "PP Lettra Mono", "Courier New", monospace;
+  font-weight: 500;
+  font-size: 16px;
+  background: #ffffff;
+  color: #000000;
+  line-height: 1.4;
+  min-height: 100vh;
+}
+
+/* titoli e sottotitoli: peso Ultralight in corsivo */
+h1,
+.category-label {
+  font-family: "PP Lettra Mono", "Courier New", monospace;
+  font-weight: 200;
+  font-style: italic;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+/* ============================================
+   HEADER
+   Fisso in alto, sempre uguale su ogni pagina.
+   Solo testo, nessun logo grafico per ora.
+   ============================================ */
+.site-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 24px 32px;
+  z-index: 100;
+  background: #ffffff;
+  font-size: 13px;
+  letter-spacing: 0.02em;
+}
+
+.site-header .name {
+  font-family: "PP Lettra Mono", "Courier New", monospace;
+  font-weight: 200;
+  font-style: italic;
+  font-size: 16px;
+  text-transform: uppercase;
+}
+
+.site-header nav {
+  display: flex;
+  gap: 24px;
+}
+
+.site-header nav a {
+  position: relative;
+}
+
+/* piccolo hover: solo una sottile riga sotto, niente di più */
+.site-header nav a:hover {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+/* ============================================
+   CATEGORY FILTER — stile "menu bar" retro
+   Barra piatta grigia in stile vecchi programmi Windows,
+   con lettera sottolineata per ogni voce e stato attivo/hover
+   evidenziato come un menu aperto (blu, testo bianco).
+   Cliccando una categoria già attiva si torna a mostrare tutto.
+   ============================================ */
+.filter-bar {
+  position: fixed;
+  top: 64px;
+  left: 0;
+  right: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0;
+  padding: 3px 28px;
+  font-family: "PP Lettra Mono", "Courier New", monospace;
+  font-weight: 500;
+  font-size: 12px;
+  background: #d6d6d6;
+  border-top: 1px solid #ffffff;
+  border-bottom: 1px solid #808080;
+  z-index: 99;
+}
+
+.filter-bar button,
+.filter-bar a {
+  display: inline-flex;
+  align-items: center;
+  background: none;
+  border: 1px solid transparent;
+  border-radius: 0;
+  font: inherit;
+  color: #000;
+  cursor: pointer;
+  padding: 3px 9px;
+}
+
+.filter-bar button.active,
+.filter-bar button:hover,
+.filter-bar a:hover {
+  background: var(--accent-start);
+  color: #ffffff;
+}
+
+/* in homepage la barra filtri è dentro la finestra Paint, non più
+   fissa in cima alla pagina: torna in flusso normale */
+.paint-app .filter-bar {
+  position: static;
+  border-top: none;
+  border-bottom: 1px solid #808080;
+  padding: 4px 8px;
+}
+
+/* ============================================
+   HOME — SCATTERED BOARD, FOTO TRASCINABILI
+   Le immagini sono sparse liberamente, posizionate/
+   ruotate via style inline in index.html. Ogni foto si
+   trascina singolarmente (script.js) e va in primo piano
+   mentre viene spostata.
+   ============================================ */
+.canvas-wrap {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  height: 100vh;
+  user-select: none;
+}
+
+.canvas {
+  position: absolute;
+  inset: 0;
+}
+
+.project-block {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  cursor: grab;
+  touch-action: none;
+  -webkit-user-drag: none;
+  user-drag: none;
+  transition: opacity 0.25s ease;
+  background: #c0c0c0;
+  border: 2px solid;
+  border-color: #ffffff #808080 #808080 #ffffff;
+  padding: 3px;
+  box-sizing: border-box;
+  box-shadow: 3px 3px 8px rgba(0, 0, 0, 0.35);
+}
+
+.project-block * {
+  -webkit-user-drag: none;
+  user-drag: none;
+}
+
+.project-block.is-dragging {
+  cursor: grabbing;
+  transition: none;
+}
+
+.project-block.is-dragging {
+  box-shadow: 5px 5px 14px rgba(0, 0, 0, 0.45);
+}
+
+/* in modalità "una foto alla volta" resta visibile solo quella attiva */
+.project-block.is-float-hidden {
+  display: none;
+}
+
+/* barra del titolo stile finestra Windows, con il nome del progetto */
+.win-titlebar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  background: linear-gradient(to right, var(--accent-start), var(--accent-end));
+  color: #ffffff;
+  font-family: "PP Lettra Mono", "Courier New", monospace;
+  font-size: 12px;
+  font-weight: 500;
+  padding: 2px 3px 2px 4px;
+  margin-bottom: 3px;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.win-titlebar .win-title {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* maiuscolo/bold solo sui titoli delle foto che fluttuano nella
+   bacheca, non sulla finestra della lista statica "index of" */
+.project-block .win-titlebar .win-title {
+  text-transform: uppercase;
+  font-weight: 700;
+}
+
+.win-titlebar .win-controls {
+  display: flex;
+  gap: 2px;
+  flex-shrink: 0;
+}
+
+.win-titlebar .win-controls span {
+  width: 13px;
+  height: 11px;
+  background: #c0c0c0;
+  border: 1px solid;
+  border-color: #ffffff #000000 #000000 #ffffff;
+}
+
+.project-block .swatch {
+  box-sizing: border-box;
+  object-fit: cover;
+  display: block;
+}
+
+/* ============================================
+   FINESTRA "INDEX OF"
+   Mini-finestra con titlebar (stessa .win-titlebar delle altre),
+   un elenco di nome + anno in stile "index of" da server. Usata
+   nella pagina archivio (category.html) come lista progetti.
+   ============================================ */
+.list-window {
+  display: block;
+  background: #c0c0c0;
+  border: 2px solid;
+  border-color: #ffffff #808080 #808080 #ffffff;
+  padding: 3px;
+  box-sizing: border-box;
+  box-shadow: 3px 3px 8px rgba(0, 0, 0, 0.35);
+}
+
+.list-window-body {
+  background: #ffffff;
+  padding: 14px 20px 20px;
+  font-family: "PP Lettra Mono", "Courier New", monospace;
+  font-weight: 500;
+  font-size: 14px;
+}
+
+.list-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 24px;
+  width: 100%;
+  background: none;
+  border: none;
+  border-bottom: 1px dotted rgba(0, 0, 0, 0.3);
+  padding: 7px 0;
+  font: inherit;
+  color: #000000;
+  text-align: left;
+}
+
+.list-row--header {
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 11px;
+  letter-spacing: 0.04em;
+  border-bottom: 1px solid #000000;
+  opacity: 0.6;
+}
+
+button.list-row {
+  cursor: pointer;
+}
+
+/* hover e selezione usano il colore d'accento corrente
+   (mai un rosso fisso): solo il testo cambia colore */
+button.list-row:hover .list-row-name,
+button.list-row.active .list-row-name {
+  color: var(--accent-solid);
+  text-decoration: underline;
+}
+
+.list-row-year {
+  white-space: nowrap;
+  opacity: 0.6;
+}
+
+/* ============================================
+   HOMEPAGE — FINESTRA PAINT
+   Homepage definitiva: un'unica finestra Paint, grande e
+   centrale, che unisce la bacheca in movimento e la palette
+   colori delle due versioni precedenti. La toolbar a sinistra
+   è la navigazione a miniature (foto reali dei progetti,
+   volutamente piccole); il canvas ospita la foto attiva che
+   rimbalza come un DVD (vedi script.js).
+   ============================================ */
+.home-hero {
+  display: flex;
+  padding: 56px 32px 64px;
+  justify-content: center;
+}
+
+/* nome più grande e in evidenza: la finestra è ora anche l'header */
+.hero-titlebar {
+  padding: 8px 10px;
+}
+
+.hero-titlebar .win-title {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+.hero-titlebar .win-controls span {
+  width: 16px;
+  height: 14px;
+}
+
+.paint-app {
+  width: 100%;
+  max-width: 1100px;
+  background: #c0c0c0;
+  border: 2px solid;
+  border-color: #ffffff #808080 #808080 #ffffff;
+  padding: 3px;
+  box-sizing: border-box;
+  box-shadow: 4px 4px 12px rgba(0, 0, 0, 0.35);
+  display: flex;
+  flex-direction: column;
+}
+
+.paint-body {
+  display: flex;
+  flex: 1;
+  min-height: 60vh;
+  background: #c0c0c0;
+  padding: 4px;
+  gap: 4px;
+}
+
+/* toolbar riusata come navigazione a miniature: ogni pulsante
+   è la foto reale di un progetto — piccola apposta */
+.paint-toolbar {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 3px;
+  align-content: start;
+  width: 56px;
+  background: #c0c0c0;
+  border: 1px solid;
+  border-color: #808080 #ffffff #ffffff #808080;
+  padding: 3px;
+}
+
+.thumb-nav-item {
+  width: 24px;
+  height: 24px;
+  padding: 0;
+  border: 1px solid;
+  border-color: #ffffff #808080 #808080 #ffffff;
+  background: #d9d9d9;
+  cursor: pointer;
+  overflow: hidden;
+}
+
+.thumb-nav-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.thumb-nav-item:hover,
+.thumb-nav-item.active {
+  outline: 1px solid #000000;
+  outline-offset: -1px;
+}
+
+.paint-canvas {
+  position: relative;
+  overflow: hidden;
+  flex: 1;
+  background: #ffffff;
+  border: 1px solid;
+  border-color: #808080 #ffffff #ffffff #808080;
+}
+
+.paint-statusbar {
+  background: #c0c0c0;
+  border-top: 1px solid #ffffff;
+  padding: 3px 8px;
+  font-family: "PP Lettra Mono", "Courier New", monospace;
+  font-size: 11px;
+  margin-top: 3px;
+}
+
+/* bottone vero e proprio (non solo testo sottolineato) per evitare che
+   si confonda con gli swatch della palette subito sotto: bordo "incassato"
+   in stile Windows, cosi' si capisce a colpo d'occhio che e' un'altra cosa */
+.paint-color-label {
+  display: inline-block;
+  text-decoration: underline;
+  opacity: 0.85;
+  background: #c0c0c0;
+  border: 1px solid;
+  border-color: #808080 #ffffff #ffffff #808080;
+  padding: 2px 6px;
+  margin-bottom: 2px;
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+}
+
+.paint-color-label:hover {
+  opacity: 1;
+  background: #cacaca;
+}
+
+/* palette colori sempre visibile, integrata nella finestra.
+   Cliccando uno swatch cambia davvero il colore d'accento del
+   sito (titlebar, evidenziazioni del filtro, link della lista
+   "index of") — vedi script.js */
+.paint-palette {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2px;
+  background: #c0c0c0;
+  border: 1px solid;
+  border-color: #808080 #ffffff #ffffff #808080;
+  padding: 4px;
+  margin-top: 3px;
+}
+
+.paint-palette button {
+  width: 22px;
+  height: 16px;
+  border: 1px solid;
+  border-color: #808080 #ffffff #ffffff #808080;
+  padding: 0;
+  cursor: pointer;
+}
+
+.paint-palette button:hover,
+.paint-palette button.active {
+  outline: 2px solid #000000;
+  outline-offset: 1px;
+}
+
+/* ============================================
+   PAGINA ARCHIVIO (category.html)
+   Fedele alla bacheca della homepage: la barra in alto riusa la
+   stessa identica finestra (titlebar + barra filtri), e la lista
+   progetti è la stessa mini-finestra "Index of" con la sua titlebar
+   — qui restano ferme sulla pagina invece che sparse/in overlay.
+   ============================================ */
+
+/* la barra in cima è un .paint-app come quello in homepage, ma a
+   piena larghezza invece che centrato e con un tetto di 1100px */
+.paint-app.archive-topbar {
+  max-width: none;
+  width: 100%;
+}
+
+.archive-body {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: 40px;
+  padding: 48px 32px 96px;
+}
+
+.archive-body .list-window {
+  flex: 0 0 340px;
+  width: 340px;
+}
+
+.archive-content {
+  flex: 1 1 480px;
+  max-width: 1000px;
+  padding: 4px 0 0;
+}
+
+.archive-content .category-label {
+  text-transform: uppercase;
+  font-size: 12px;
+  letter-spacing: 0.03em;
+  opacity: 0.6;
+  margin-bottom: 8px;
+}
+
+.archive-content h1 {
+  font-size: clamp(28px, 4vw, 42px);
+  margin-bottom: 20px;
+}
+
+.archive-content p {
+  font-size: 14px;
+  max-width: 640px;
+  margin-bottom: 16px;
+}
+
+.archive-content .credit {
+  margin-top: 8px;
+  font-size: 13px;
+  opacity: 0.6;
+}
+
+/* indicatore video: usa il colore d'accento corrente, compare solo
+   se il progetto ha un video */
+.archive-video-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: none;
+  border: none;
+  font-family: "PP Lettra Mono", "Courier New", monospace;
+  font-weight: 700;
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  color: var(--accent-solid);
+  cursor: pointer;
+  padding: 0;
+  margin-bottom: 20px;
+}
+
+.archive-video-btn img {
+  width: 24px;
+  height: auto;
+  image-rendering: pixelated;
+}
+
+.archive-video-btn:hover {
+  text-decoration: underline;
+}
+
+/* mosaico editoriale: dimensioni variabili invece di una griglia
+   uniforme, per integrare le immagini nella composizione */
+.archive-gallery {
+  columns: 3 220px;
+  column-gap: 16px;
+  margin-top: 32px;
+}
+
+.archive-gallery img,
+.archive-gallery video {
+  width: 100%;
+  height: auto;
+  display: block;
+  margin-bottom: 16px;
+  break-inside: avoid;
+}
+
+/* ultima tessera del mosaico, al posto delle foto tagliate oltre
+   al limite curato: segnala che ce ne sono altre, invece di
+   sparire e basta */
+.archive-more-photos {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  background: #f2f2f2;
+  border: 1px dashed rgba(0, 0, 0, 0.25);
+  font: inherit;
+  font-family: "PP Lettra Mono", "Courier New", monospace;
+  font-size: 11px;
+  text-align: center;
+  color: rgba(0, 0, 0, 0.55);
+  padding: 12px;
+  cursor: pointer;
+  margin-bottom: 16px;
+  break-inside: avoid;
+}
+
+.archive-more-photos:hover {
+  background: #e8e8e8;
+  border-color: var(--accent-start);
+  color: var(--accent-solid);
+}
+
+.archive-more-photos img {
+  width: 32px;
+  height: auto;
+  image-rendering: pixelated;
+}
+
+/* riquadri di descrizione: incastonati nel mosaico vicino alle foto
+   invece che un unico blocco di testo in cima alla pagina. Stesso
+   linguaggio grafico delle finestre del sito (barra colorata in
+   stile titlebar) ma minimale — niente bordi pesanti, si adattano
+   al colore d'accento corrente */
+.desc-box {
+  width: 100%;
+  box-sizing: border-box;
+  background: #ffffff;
+  border: 1px solid #d9d9d9;
+  margin-bottom: 16px;
+  break-inside: avoid;
+}
+
+.desc-box-bar {
+  height: 5px;
+  background: linear-gradient(to right, var(--accent-start), var(--accent-end));
+}
+
+.archive-gallery .desc-box p {
+  margin: 0;
+  max-width: none;
+  padding: 14px 16px;
+  font-size: 14px;
+  line-height: 1.55;
+}
+
+/* foto con credito fotografico individuale (es. Nike): la didascalia
+   segue subito sotto, piccola e discreta come le altre etichette
+   in stile "vecchio sistema" già usate nel sito */
+.archive-photo {
+  margin: 0 0 16px;
+  break-inside: avoid;
+}
+
+.archive-photo img {
+  margin-bottom: 4px;
+}
+
+.photo-credit {
+  display: block;
+  font-family: "PP Lettra Mono", "Courier New", monospace;
+  font-size: 10px;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  opacity: 0.55;
+}
+
+/* ============================================
+   PROJECT PAGE
+   Titolo, categoria, intro breve, poi immagini
+   grandi in sequenza verticale.
+   ============================================ */
+.project-header {
+  padding: 140px 32px 48px;
+  max-width: 720px;
+}
+
+.project-header .category-label {
+  text-transform: uppercase;
+  font-size: 12px;
+  letter-spacing: 0.03em;
+  opacity: 0.6;
+  margin-bottom: 8px;
+}
+
+/* icona-indicatore stile "vecchia icona di sistema": segnala subito,
+   prima di scorrere la pagina, che il progetto contiene un video */
+.content-icons {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+
+.content-icons img {
+  width: 26px;
+  height: auto;
+  image-rendering: pixelated;
+}
+
+.project-header h1 {
+  font-size: clamp(28px, 4vw, 42px);
+  font-weight: 200;
+  margin-bottom: 16px;
+}
+
+.project-header p {
+  font-size: 14px;
+  max-width: 56ch;
+}
+
+.project-header p + p {
+  margin-top: 16px;
+}
+
+.project-header .credit {
+  margin-top: 24px;
+  font-size: 13px;
+  opacity: 0.6;
+}
+
+.project-images {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  padding: 0 32px 96px;
+}
+
+.project-images img,
+.project-images video {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* FILMSTRIP — riga orizzontale scorrevole, per set con molte foto */
+.project-images.filmstrip {
+  flex-direction: row;
+  align-items: flex-start;
+  overflow-x: auto;
+  gap: 20px;
+  padding-bottom: 64px;
+  scroll-snap-type: x proximity;
+  -webkit-overflow-scrolling: touch;
+}
+
+.project-images.filmstrip img,
+.project-images.filmstrip video {
+  width: auto;
+  height: 76vh;
+  max-width: 90vw;
+  flex: 0 0 auto;
+  scroll-snap-align: start;
+}
+
+/* MASONRY — colonne a cascata, per set fotografici numerosi */
+.project-images.masonry {
+  display: block;
+  columns: 3;
+  column-gap: 20px;
+}
+
+.project-images.masonry img,
+.project-images.masonry video {
+  width: 100%;
+  margin-bottom: 20px;
+  break-inside: avoid;
+}
+
+/* GRID2 — due colonne regolari, prima immagine a piena larghezza */
+.project-images.grid2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+
+.project-images.grid2 > :first-child {
+  grid-column: 1 / -1;
+}
+
+/* HERO-GRID — una foto grande in apertura, poi una griglia di foto più piccole */
+.project-images.hero-grid {
+  display: block;
+}
+
+.project-images.hero-grid > :first-child {
+  width: 100%;
+  height: 72vh;
+  object-fit: cover;
+  margin-bottom: 24px;
+}
+
+.project-images.hero-grid .grid-rest {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.project-images.hero-grid .grid-rest img,
+.project-images.hero-grid .grid-rest video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  aspect-ratio: 1 / 1;
+}
+
+@media (max-width: 900px) {
+  .project-images.masonry {
+    columns: 2;
+  }
+}
+
+@media (max-width: 700px) {
+  .project-images.filmstrip img,
+  .project-images.filmstrip video {
+    height: 50vh;
+  }
+
+  .project-images.masonry {
+    columns: 1;
+  }
+
+  .project-images.grid2 {
+    grid-template-columns: 1fr;
+  }
+
+  .project-images.hero-grid .grid-rest {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.back-link {
+  display: inline-block;
+  padding: 0 32px 48px;
+  font-size: 13px;
+}
+
+/* ============================================
+   ABOUT PAGE
+   Testo a sinistra, immagini a destra (colonna doppia).
+   Su mobile diventa una sola colonna impilata.
+   ============================================ */
+.about-layout {
+  padding: 56px 32px 96px;
+  display: grid;
+  grid-template-columns: minmax(0, 640px);
+  gap: 64px;
+  align-items: start;
+}
+
+.about-text h1 {
+  font-size: clamp(24px, 3vw, 32px);
+  margin-bottom: 24px;
+}
+
+.about-text p {
+  font-size: 14px;
+  max-width: 46ch;
+  margin-bottom: 20px;
+}
+
+.about-text .cv-link {
+  display: inline-block;
+  margin-top: 16px;
+  font-size: 13px;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+.about-contact {
+  margin-top: 32px;
+  font-size: 14px;
+}
+
+/* email e Instagram sono link cliccabili: sottolineati cosi' si
+   capisce subito, senza dover passare il mouse sopra per scoprirlo */
+.about-contact a {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+/* ============================================
+   RESPONSIVE — MOBILE
+   Sotto 700px: la griglia diventa una colonna sola,
+   l'about si impila, i filtri restano leggibili.
+   ============================================ */
+@media (max-width: 700px) {
+  .about-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .archive-body {
+    padding: 24px 20px 64px;
+    gap: 24px;
+  }
+
+  .archive-body .list-window {
+    flex: 1 1 100%;
+    width: 100%;
+  }
+
+  .archive-content {
+    padding: 0;
+  }
+
+  .archive-gallery {
+    columns: 2 140px;
+  }
+
+  /* ------------------------------------------
+     HOMEPAGE su mobile: la finestra Paint è pensata
+     per schermi larghi (colonna miniature fissa, titolo
+     che trunca, palette minuscola). Qui la riadattiamo
+     senza toccare struttura/interazioni desktop:
+     toolbar miniature come striscia orizzontale scorrevole
+     sopra il canvas invece che colonna a fianco, titolo e
+     palette più leggibili al tocco.
+     ------------------------------------------ */
+  .home-hero {
+    padding: 24px 12px 40px;
+  }
+
+  .hero-titlebar .win-title {
+    font-size: 15px;
+  }
+
+  .paint-app {
+    max-width: 100%;
+  }
+
+  .paint-body {
+    flex-direction: column;
+    min-height: 0;
+  }
+
+  .paint-toolbar {
+    width: 100%;
+    display: flex;
+    grid-template-columns: none;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    gap: 4px;
+  }
+
+  .thumb-nav-item {
+    flex: 0 0 auto;
+    width: 36px;
+    height: 36px;
+  }
+
+  .paint-canvas {
+    flex: none;
+    width: 100%;
+    height: 52vh;
+  }
+
+  /* le foto della bacheca hanno dimensioni fisse in px pensate
+     per un canvas largo: su mobile le limitiamo perché non
+     escano dal riquadro */
+  .project-block .swatch {
+    width: auto !important;
+    height: auto !important;
+    max-width: 42vw !important;
+    max-height: 24vh !important;
+  }
+
+  .paint-palette button {
+    width: 28px;
+    height: 22px;
+  }
+}
+
+/* ============================================
+   LIGHTBOX
+   Foto ingrandita a schermo intero con navigazione a freccine,
+   usata su tutte le gallerie del sito (pagine progetto e
+   pagina archivio) — vedi script.js.
+   ============================================ */
+.project-images img,
+.archive-gallery img:not(.archive-more-photos img) {
+  cursor: zoom-in;
+}
+
+.lightbox-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.92);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 500;
+}
+
+.lightbox-overlay[hidden] {
+  display: none;
+}
+
+.lightbox-img {
+  max-width: 88vw;
+  max-height: 84vh;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  box-shadow: 0 12px 48px rgba(0, 0, 0, 0.6);
+}
+
+.lightbox-close,
+.lightbox-prev,
+.lightbox-next {
+  position: fixed;
+  background: none;
+  border: none;
+  color: #ffffff;
+  font-family: "PP Lettra Mono", "Courier New", monospace;
+  cursor: pointer;
+  padding: 8px;
+  line-height: 1;
+}
+
+.lightbox-close {
+  top: 20px;
+  right: 28px;
+  font-size: 28px;
+}
+
+.lightbox-prev,
+.lightbox-next {
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 42px;
+}
+
+.lightbox-prev {
+  left: 12px;
+}
+
+.lightbox-next {
+  right: 12px;
+}
+
+.lightbox-close:hover,
+.lightbox-prev:hover,
+.lightbox-next:hover {
+  color: var(--accent-start);
+}
+
+.lightbox-counter {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: #ffffff;
+  opacity: 0.7;
+  font-family: "PP Lettra Mono", "Courier New", monospace;
+  font-size: 11px;
+}
+
+@media (max-width: 700px) {
+  .lightbox-prev,
+  .lightbox-next {
+    font-size: 32px;
+  }
+}
