@@ -965,7 +965,14 @@ button.list-row.active .list-row-name {
      sola occupa quasi tutta la larghezza, quindi in riga si spezzava
      in modo poco leggibile. "About" resta da sola in alto a destra
      (è sempre l'ultimo link della barra, in ogni pagina) */
-  .filter-bar {
+  /* selettore ".paint-app .filter-bar" (due classi) qui sotto invece
+     del solo ".filter-bar": la regola ".paint-app .filter-bar" più in
+     alto nel file (position: static) ha specificità più alta, quindi
+     senza questo aggancio "vinceva" lei anche qui dentro il media
+     query, e "About" (posizionato "absolute" rispetto a un antenato
+     che restava "static") finiva per agganciarsi al contenitore
+     sbagliato più in alto nella pagina, fuori dalla finestra */
+  .paint-app .filter-bar {
     position: relative;
     flex-direction: column;
     align-items: flex-start;
@@ -973,7 +980,7 @@ button.list-row.active .list-row-name {
     padding: 6px 60px 6px 8px;
   }
 
-  .filter-bar a:last-child {
+  .paint-app .filter-bar a:last-child {
     position: absolute;
     top: 6px;
     right: 8px;
