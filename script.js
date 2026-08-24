@@ -396,13 +396,40 @@ if (archiveList && archiveContent && typeof PROJECTS !== 'undefined') {
     a.classList.toggle('active', a.dataset.cat === currentCat);
   });
 
+  // alcuni progetti (es. i due Workshop) sono "figli" di un altro
+  // progetto (Material Dialogue, vedi "children" in projects.js):
+  // non compaiono come voce a sé nell'indice, ma dentro un sottomenu
+  // a tendina agganciato al progetto "genitore"
+  const rowHtml = (p, activeSlug, extraClass) => (
+    `<button type="button" class="list-row${extraClass || ''}${p.slug === activeSlug ? ' active' : ''}" data-slug="${p.slug}">` +
+    `<span class="list-row-name">${p.title}</span>` +
+    `<span class="list-row-year">${p.year}</span>` +
+    `</button>`
+  );
+
   function renderList(activeSlug) {
-    const rows = items.map(p => (
-      `<button type="button" class="list-row${p.slug === activeSlug ? ' active' : ''}" data-slug="${p.slug}">` +
-      `<span class="list-row-name">${p.title}</span>` +
-      `<span class="list-row-year">${p.year}</span>` +
-      `</button>`
-    )).join('');
+    const childSlugs = new Set(items.flatMap(p => p.children || []));
+    const topItems = items.filter(p => !childSlugs.has(p.slug));
+
+    const rows = topItems.map(p => {
+      if (!p.children || !p.children.length) return rowHtml(p, activeSlug);
+
+      const childItems = p.children
+        .map(slug => items.find(c => c.slug === slug))
+        .filter(Boolean);
+      // il sottomenu resta aperto quando il genitore o uno dei figli
+      // è il progetto attivo, cosi' arrivando da un link diretto a un
+      // Workshop (es. dalle foto in homepage) si vede subito dov'e'
+      const isOpen = p.slug === activeSlug || childItems.some(c => c.slug === activeSlug);
+      const subRows = childItems.map(c => rowHtml(c, activeSlug, ' list-row--sub')).join('');
+
+      return (
+        `<div class="list-row-group${isOpen ? ' is-open' : ''}">` +
+        rowHtml(p, activeSlug, ' list-row--parent') +
+        `<div class="list-subrows">${subRows}</div>` +
+        `</div>`
+      );
+    }).join('');
 
     archiveList.innerHTML =
       `<div class="win-titlebar">` +

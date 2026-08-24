@@ -217,7 +217,8 @@ const PROJECTS = [
       "assets/img/material-dialogue/gallery-06.jpg"
     ],
     "video": "assets/video/material-dialogue.mp4",
-    "url": "work/material-dialogue.html"
+    "url": "work/material-dialogue.html",
+    "children": ["fungicharm-workshop", "workshop-mdeffest"]
   },
   {
     "slug": "fungicharm-workshop",
