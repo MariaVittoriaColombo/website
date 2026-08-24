@@ -64,8 +64,7 @@ const PROJECTS = [
       "DESIGN AND PRODUCTION: NIKE Global Design, Dropcity",
       "SOUND CURATION: C2C Festival",
       "COLLABORATION: Vasto Gallery",
-      "PHOTOGRAPHY: Giulia Greco, Giulia Montelli, VastoGallery",
-      "IMAGE COURTESY: NIKE, NAKED SPACE, Vasto Gallery"
+      "PHOTOGRAPHY: Giulia Greco, Giulia Montelli, VastoGallery, NIKE"
     ],
     "images": [
       "assets/img/naked-space-nike/principale.jpg",
