@@ -89,7 +89,7 @@ const PROJECTS = [
       "Production and organizational support for an institutional field trip organised as part of the MDEF (Master in Design for Emergent Futures) programme, involving students and faculty from IAAC and Elisava. Contributed to travel planning, logistics, workshop scheduling, accommodation coordination, and day-to-day operations on site, ensuring the smooth running of educational activities while adapting to the challenges of an international context.",
       "20-day journey across Senegal, travelling from Dakar and Saint-Louis to the more rural regions of Casamance. The trip brought together visits to local artisans, makers, and collectives, with the aim of learning from the different ways communities make, repair, reuse, and work with local materials."
     ],
-    "credits": ["Photography by Jessica Guy"],
+    "credits": ["MDEF Staff: Guillem Camprodon, Saúl Baeza Argüello, Chiara Dall'Olio, Jessica Guy", "Photography by Jessica Guy"],
     "images": [
       "assets/img/institutional-trip-senegal/principale.jpg",
       "assets/img/institutional-trip-senegal/gallery-01.jpg",
@@ -125,21 +125,21 @@ const PROJECTS = [
     ],
     "credits": [
       "Director: Anxo Casal I Parareda",
-      "Director de Fotograf\u00eda: Joel Burges",
-      "Dir. creativo: Nico Barreto",
-      "Producido por: AM PM",
-      "Prod. Ejecutivo: Luca Dobry",
-      "Productor: David Haro",
-      "Jefa Producci\u00f3n: Rita Gisbert",
-      "Asistente de Producci\u00f3n: M\u00aa Vittoria Colombo",
+      "Director of Photography: Joel Burges",
+      "Creative Director: Nico Barreto",
+      "Produced by: AM PM",
+      "Executive Producer: Luca Dobry",
+      "Producer: David Haro",
+      "Head of Production: Rita Gisbert",
+      "Production Assistant: M\u00aa Vittoria Colombo",
       "Music Production: Choclock, Blurred, Mayo, Tuiste, PMP",
       "Mix & Master: FRE3ZA, PMP",
       "Gaffer: Jose Bruzual",
-      "Montaje: Anxo Casal",
-      "Color: Guillem Birba",
-      "Foto Fija: Javi Westt",
-      "Estilismo: Pablo Barreto",
-      "Camara/Luces: Napalm"
+      "Editing: Anxo Casal",
+      "Color Grading: Guillem Birba",
+      "Still Photography: Javi Westt",
+      "Styling: Pablo Barreto",
+      "Camera/Lights: Napalm"
     ],
     "images": [
       "assets/img/music-video-abhir/principale.jpg",
@@ -160,7 +160,7 @@ const PROJECTS = [
       "The class was divided into thematic clusters based on the different areas of research explored through the projects. The exhibition schedule was structured around these clusters, with the timing of each presentation adapted to the spatial requirements and duration of each project, creating a coherent flow throughout the exhibition.",
       "To create a unified visual language across the different projects, each student designed a personal flag connected to their work. These were produced alongside individual display bases featuring the student's name, project title and a QR code linking to the project."
     ],
-    "credits": ["Photography by Ardila and Ramon Prat"],
+    "credits": ["MDEF Staff: Guillem Camprodon, Saúl Baeza Argüello, Chiara Dall'Olio, Jessica Guy", "Photography by Ardila and Ramon Prat"],
     "images": [
       "assets/img/mdef-festival/principale.jpg",
       "assets/img/mdef-festival/gallery-01.jpg",
@@ -255,7 +255,7 @@ const PROJECTS = [
       "The activity extended the research presented in the exhibition beyond observation, turning the installation into an opportunity for participation and knowledge exchange. By working directly with mycelium, participants could experience its growth as an ongoing material process rather than as a finished product.",
       "The workshop was developed as part of the wider exhibition environment, where video, sound, biological materials and physical experimentation came together to create an immersive space for exploring relationships between living systems, materials and design."
     ],
-    "credits": ["In collaboration with Belen Comotto", "Photography by Ardila and Ramon Prat"],
+    "credits": ["In collaboration with Belen Comotto", "MDEF Staff: Guillem Camprodon, Saúl Baeza Argüello, Chiara Dall'Olio, Jessica Guy", "Photography by Ardila and Ramon Prat"],
     "images": [
       "assets/img/workshop-mdeffest/principale.jpg",
       "assets/img/workshop-mdeffest/gallery-01.jpg",
