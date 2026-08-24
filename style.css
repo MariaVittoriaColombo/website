@@ -973,7 +973,13 @@ button.list-row.active .list-row-name {
      che restava "static") finiva per agganciarsi al contenitore
      sbagliato più in alto nella pagina, fuori dalla finestra */
   .paint-app .filter-bar {
+    /* "top: 64px" arriva dalla regola base ".filter-bar" (pensata per
+       quando la barra è "position: fixed" in cima ad altre pagine): con
+       "position: static" restava senza effetto, ma ora che qui la
+       rendiamo "relative" (serve per agganciarci "About") si
+       "risveglia" e spinge tutto il blocco giù di 64px. Lo azzeriamo. */
     position: relative;
+    top: 0;
     flex-direction: column;
     align-items: flex-start;
     gap: 2px;
