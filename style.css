@@ -10,6 +10,12 @@
   --accent-start: #FFF200;
   --accent-end: #FFF759;
   --accent-solid: #8C8500;
+  /* testo delle titlebar (bianco o nero): calcolato in base alla
+     luminosità del colore corrente per restare sempre leggibile —
+     nero coi colori chiari (giallo, bianco, pastello...), bianco
+     con quelli scuri (nero, blu, rosso scuro...). Il default giallo
+     usa nero. Ricalcolato in tempo reale da applyAccent() in script.js */
+  --titlebar-text: #000000;
 }
 
 /* ============================================
@@ -254,7 +260,7 @@ img {
   justify-content: space-between;
   gap: 8px;
   background: linear-gradient(to right, var(--accent-start), var(--accent-end));
-  color: #ffffff;
+  color: var(--titlebar-text);
   font-family: "PP Lettra Mono", "Courier New", monospace;
   font-size: 12px;
   font-weight: 500;
@@ -710,6 +716,45 @@ button.list-row.active .list-row-name {
   letter-spacing: 0.03em;
   text-transform: uppercase;
   opacity: 0.55;
+}
+
+/* riquadro crediti: tutti i crediti del progetto (design, produzione,
+   collaborazioni, foto...) raccolti in fondo alla pagina, dopo la
+   galleria, invece che sparsi come una riga in cima. Stesso linguaggio
+   grafico dei box di descrizione (barra colorata in stile titlebar) */
+.credits-box {
+  max-width: 640px;
+  box-sizing: border-box;
+  background: #ffffff;
+  border: 1px solid #d9d9d9;
+  margin-top: 40px;
+}
+
+.credits-box-bar {
+  height: 5px;
+  background: linear-gradient(to right, var(--accent-start), var(--accent-end));
+}
+
+.credits-box-label {
+  padding: 14px 16px 4px;
+  font-family: "PP Lettra Mono", "Courier New", monospace;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  opacity: 0.5;
+}
+
+.credits-box p {
+  margin: 0;
+  max-width: none;
+  padding: 4px 16px;
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.credits-box p:last-child {
+  padding-bottom: 16px;
 }
 
 /* ============================================

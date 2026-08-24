@@ -231,9 +231,13 @@ let currentAccentHex = null;
 function applyAccent(hex) {
   currentAccentHex = hex;
   const solid = luminance(hex) > 0.75 ? darken(hex, 0.45) : hex;
+  // testo delle titlebar: nero sui colori chiari (giallo, bianco,
+  // pastello...), bianco su quelli scuri — resta sempre leggibile
+  const titlebarText = luminance(hex) > 0.55 ? '#000000' : '#ffffff';
   document.documentElement.style.setProperty('--accent-start', hex);
   document.documentElement.style.setProperty('--accent-end', lighten(hex, 0.35));
   document.documentElement.style.setProperty('--accent-solid', solid);
+  document.documentElement.style.setProperty('--titlebar-text', titlebarText);
 }
 
 // esclude facoltativamente il colore attuale, cosi' il rimbalzo si
@@ -334,6 +338,14 @@ if (archiveList && archiveContent && typeof PROJECTS !== 'undefined') {
   const requestedSlug = params.get('project');
   const items = PROJECTS.filter(p => p.category === currentCat);
 
+  // nome breve mostrato in "Index of /..." — piu' corto dello slug
+  // per le categorie con un nome lungo (es. product-material-research)
+  const CATEGORY_SHORT_NAME = {
+    'production': 'production',
+    'product-material-research': 'product-research',
+    'photography': 'photography',
+  };
+
   // evidenzia la voce corrente nella barra di navigazione
   document.querySelectorAll('#archiveNavLinks a[data-cat]').forEach(a => {
     a.classList.toggle('active', a.dataset.cat === currentCat);
@@ -349,7 +361,7 @@ if (archiveList && archiveContent && typeof PROJECTS !== 'undefined') {
 
     archiveList.innerHTML =
       `<div class="win-titlebar">` +
-      `<span class="win-title">Index of /${currentCat}</span>` +
+      `<span class="win-title">Index of /${CATEGORY_SHORT_NAME[currentCat] || currentCat}</span>` +
       `<span class="win-controls"><span></span><span></span><span></span></span>` +
       `</div>` +
       `<div class="list-window-body">` +
@@ -456,15 +468,31 @@ if (archiveList && archiveContent && typeof PROJECTS !== 'undefined') {
       ? `<video src="${project.video}" controls playsinline preload="none" poster="${posterSrc}" id="archiveVideo"></video>`
       : '';
 
-    const creditHtml = project.credit ? `<p class="credit">${project.credit}</p>` : '';
+    // i crediti stanno tutti in fondo alla pagina, dopo la galleria,
+    // in un riquadro unico invece che una riga sparsa in cima: ogni
+    // voce puo' essere "ETICHETTA: valore" (in grassetto la parte
+    // prima dei due punti) oppure una semplice frase
+    const credits = project.credits || [];
+    const creditLineHtml = line => {
+      const sep = line.indexOf(': ');
+      if (sep === -1) return `<p>${line}</p>`;
+      return `<p><strong>${line.slice(0, sep)}:</strong> ${line.slice(sep + 2)}</p>`;
+    };
+    const creditsBoxHtml = credits.length
+      ? `<div class="credits-box">` +
+        `<div class="credits-box-bar"></div>` +
+        `<div class="credits-box-label">Credits</div>` +
+        credits.map(creditLineHtml).join('') +
+        `</div>`
+      : '';
 
     archiveContent.innerHTML =
       `<div class="category-label">${project.categoryLabel}</div>` +
       `<h1>${project.title}</h1>` +
       mainParagraphHtml +
-      creditHtml +
       videoButtonHtml +
-      `<div class="archive-gallery">${mediaHtml}${videoTagHtml}${morePhotosHtml}</div>`;
+      `<div class="archive-gallery">${mediaHtml}${videoTagHtml}${morePhotosHtml}</div>` +
+      creditsBoxHtml;
 
     // titolo e meta description della scheda del browser seguono il
     // progetto mostrato, non restano fissi su "Archive" per ogni pagina
