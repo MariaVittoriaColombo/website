@@ -1030,8 +1030,13 @@ button.list-row.active .list-row-name {
     padding: 0;
   }
 
+  /* una sola colonna piena invece di 2 strette: con 2 colonne su uno
+     schermo da 375px ogni colonna restava larga ~140px, i riquadri di
+     testo (che non si accorciano, si allungano) diventavano altissimi
+     e stretti, sbilanciati rispetto alle foto e pieni di righe andate
+     a capo — risultato: grossi vuoti bianchi e ordine poco leggibile */
   .archive-gallery {
-    columns: 2 140px;
+    columns: 1;
   }
 
   /* ------------------------------------------
