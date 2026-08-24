@@ -21,7 +21,7 @@ const PROJECTS = [
       "FOOD: Mesa Lobo",
       "COLLABORATION: Fever, Primavera Sound",
       "SOUND COLLABORATION: Hello Sasy, Sofy Suars, Fillo Deportaberta",
-      "IMAGE COURTESY: Fever"
+      "PHOTOGRAPHY: Fever"
     ],
     "images": [
       "assets/img/naked-space-fever/principale.jpg",
