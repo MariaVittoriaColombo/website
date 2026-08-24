@@ -17,12 +17,22 @@ const isSmallViewport = window.matchMedia('(max-width: 700px)').matches;
 const dvdSpeed = isSmallViewport ? 0.18 : 1;
 const floatMargin = 4; // piccolo margine dai bordi del canvas
 
+// velocità in pixel AL SECONDO (non più "a frame"): 204/156 px/s
+// corrispondono a quella che era 3.4/2.6 px/frame su uno schermo a
+// 60Hz. Usando il tempo reale trascorso tra un frame e l'altro invece
+// di un numero fisso di pixel per frame, la velocità resta identica
+// che il device sia a 60Hz, 90Hz o 120Hz — prima invece un refresh
+// rate più alto faceva scattare requestAnimationFrame più spesso al
+// secondo, quindi la stessa foto si muoveva più veloce su quei device
+const BASE_VEL_X = 204;
+const BASE_VEL_Y = 156;
+
 let topZ = 10;
 let activeIndex = 0;
 let posX = 80;
 let posY = 200;
-let velX = 3.4 * dvdSpeed;
-let velY = 2.6 * dvdSpeed;
+let velX = BASE_VEL_X * dvdSpeed;
+let velY = BASE_VEL_Y * dvdSpeed;
 
 function showOnly(index) {
   projectBlocks.forEach((block, i) => {
@@ -94,7 +104,19 @@ projectBlocks.forEach((block, i) => {
 if (paintCanvas && projectBlocks.length && !prefersReducedMotion) {
   showOnly(activeIndex);
 
-  function tick() {
+  let lastTimestamp = null;
+  // se il tab è stato in background (throttling del browser) o il
+  // device ha avuto un calo di framerate, il tempo trascorso tra due
+  // frame può essere enorme: limitandolo evitiamo che la foto faccia
+  // un salto gigante (e diverso ad ogni device) appena il tab torna attivo
+  const MAX_DELTA_MS = 50;
+
+  function tick(timestamp) {
+    if (lastTimestamp === null) lastTimestamp = timestamp;
+    const deltaMs = Math.min(timestamp - lastTimestamp, MAX_DELTA_MS);
+    lastTimestamp = timestamp;
+    const dt = deltaMs / 1000; // secondi trascorsi dall'ultimo frame
+
     const active = projectBlocks[activeIndex];
 
     if (!active.classList.contains('is-dragging')) {
@@ -113,8 +135,11 @@ if (paintCanvas && projectBlocks.length && !prefersReducedMotion) {
         const maxLeft = Math.max(floatMargin, canvasRect.width - w - floatMargin);
         const maxTop = Math.max(floatMargin, canvasRect.height - h - floatMargin);
 
-        posX += velX;
-        posY += velY;
+        // spostamento in pixel/secondo × secondi trascorsi: a parità di
+        // tempo reale la foto percorre sempre la stessa distanza, che il
+        // device disegni 60, 90 o 120 frame al secondo
+        posX += velX * dt;
+        posY += velY * dt;
 
         let bounced = false;
         if (posX <= floatMargin || posX >= maxLeft) {
@@ -132,20 +157,28 @@ if (paintCanvas && projectBlocks.length && !prefersReducedMotion) {
         active.style.top = `${posY}px`;
 
         if (bounced) {
-          // tocca un bordo: cambia foto invece di continuare a rimbalzare
-          activeIndex = (activeIndex + 1) % projectBlocks.length;
-          showOnly(activeIndex);
-          const next = projectBlocks[activeIndex];
-          next.style.left = `${posX}px`;
-          next.style.top = `${posY}px`;
+          // la foto ha appena raggiunto il bordo: NON cambiamo subito.
+          // Aspettiamo il prossimo frame — così il browser fa in tempo a
+          // disegnare la foto esattamente lì, al bordo, prima che sparisca.
+          // Se il cambio avvenisse nello stesso istante in cui scriviamo
+          // la posizione finale, il browser potrebbe unire i due
+          // aggiornamenti in un solo repaint e l'occhio non vedrebbe mai
+          // la foto arrivare davvero al bordo — sembrerebbe cambiare prima.
+          requestAnimationFrame(() => {
+            activeIndex = (activeIndex + 1) % projectBlocks.length;
+            showOnly(activeIndex);
+            const next = projectBlocks[activeIndex];
+            next.style.left = `${posX}px`;
+            next.style.top = `${posY}px`;
 
-          // ...e cambia anche il colore del sito, a meno che l'utente
-          // non ne abbia già scelto uno manualmente dalla palette: in
-          // quel caso la scelta manuale resta fissa (vedi sezione
-          // PALETTE COLORI più sotto per applyAccent/pickRandomAccent)
-          if (typeof onBounceChangeAccent === 'function') {
-            onBounceChangeAccent();
-          }
+            // ...e cambia anche il colore del sito, a meno che l'utente
+            // non ne abbia già scelto uno manualmente dalla palette: in
+            // quel caso la scelta manuale resta fissa (vedi sezione
+            // PALETTE COLORI più sotto per applyAccent/pickRandomAccent)
+            if (typeof onBounceChangeAccent === 'function') {
+              onBounceChangeAccent();
+            }
+          });
         }
       }
     }
