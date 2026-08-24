@@ -222,7 +222,7 @@ const PROJECTS = [
   },
   {
     "slug": "fungicharm-workshop",
-    "title": "Fungicharm Workshop",
+    "title": "Workshop Fungicharm",
     "category": "product-material-research",
     "categoryLabel": "Product and Material Research",
     "year": "2025",
