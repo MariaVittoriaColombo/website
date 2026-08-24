@@ -101,6 +101,26 @@ projectBlocks.forEach((block, i) => {
   });
 });
 
+// --- DEBUG TEMPORANEO: pannellino in alto a sinistra per capire cosa
+// succede davvero nel browser di chi lo guarda. Da togliere una volta
+// risolto il problema del colore/velocità. ---
+const debugBox = document.createElement('div');
+debugBox.style.cssText = 'position:fixed;top:4px;left:4px;z-index:99999;background:#000;color:#0f0;font-family:monospace;font-size:11px;padding:6px 8px;white-space:pre;pointer-events:none;max-width:90vw;';
+debugBox.textContent = 'debug: avvio...';
+document.body.appendChild(debugBox);
+let debugBounces = 0;
+let debugFrames = 0;
+let debugSwaps = 0;
+function updateDebug(extra) {
+  debugBox.textContent =
+    `frames: ${debugFrames} | bounces: ${debugBounces} | swaps: ${debugSwaps}\n` +
+    `reducedMotion: ${prefersReducedMotion} | dvdSpeed: ${typeof dvdSpeed !== 'undefined' ? dvdSpeed : 'n/a'}\n` +
+    `manual accentColor: ${localStorage.getItem('accentColor')}\n` +
+    `accent-start: ${getComputedStyle(document.documentElement).getPropertyValue('--accent-start').trim()}\n` +
+    (extra || '');
+}
+updateDebug();
+
 if (paintCanvas && projectBlocks.length && !prefersReducedMotion) {
   showOnly(activeIndex);
 
@@ -112,6 +132,8 @@ if (paintCanvas && projectBlocks.length && !prefersReducedMotion) {
   const MAX_DELTA_MS = 50;
 
   function tick(timestamp) {
+    debugFrames++;
+    if (debugFrames % 60 === 0) updateDebug();
     if (lastTimestamp === null) lastTimestamp = timestamp;
     const deltaMs = Math.min(timestamp - lastTimestamp, MAX_DELTA_MS);
     lastTimestamp = timestamp;
@@ -157,6 +179,7 @@ if (paintCanvas && projectBlocks.length && !prefersReducedMotion) {
         active.style.top = `${posY}px`;
 
         if (bounced) {
+          debugBounces++;
           // la foto ha appena raggiunto il bordo: NON cambiamo subito.
           // Aspettiamo il prossimo frame — così il browser fa in tempo a
           // disegnare la foto esattamente lì, al bordo, prima che sparisca.
@@ -165,6 +188,7 @@ if (paintCanvas && projectBlocks.length && !prefersReducedMotion) {
           // aggiornamenti in un solo repaint e l'occhio non vedrebbe mai
           // la foto arrivare davvero al bordo — sembrerebbe cambiare prima.
           requestAnimationFrame(() => {
+            debugSwaps++;
             activeIndex = (activeIndex + 1) % projectBlocks.length;
             showOnly(activeIndex);
             const next = projectBlocks[activeIndex];
@@ -178,6 +202,7 @@ if (paintCanvas && projectBlocks.length && !prefersReducedMotion) {
             if (typeof onBounceChangeAccent === 'function') {
               onBounceChangeAccent();
             }
+            updateDebug(`ultimo swap: frame ${debugFrames}`);
           });
         }
       }
