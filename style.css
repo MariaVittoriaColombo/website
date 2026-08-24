@@ -959,6 +959,26 @@ button.list-row.active .list-row-name {
     grid-template-columns: 1fr;
   }
 
+  /* le voci del menu (Creative Production / Product and Material
+     Research / Photography) impilate una sotto l'altra invece che
+     in riga: su schermi stretti "Product and Material Research" da
+     sola occupa quasi tutta la larghezza, quindi in riga si spezzava
+     in modo poco leggibile. "About" resta da sola in alto a destra
+     (è sempre l'ultimo link della barra, in ogni pagina) */
+  .filter-bar {
+    position: relative;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2px;
+    padding: 6px 60px 6px 8px;
+  }
+
+  .filter-bar a:last-child {
+    position: absolute;
+    top: 6px;
+    right: 8px;
+  }
+
   .archive-body {
     padding: 24px 20px 64px;
     gap: 24px;
