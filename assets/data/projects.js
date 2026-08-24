@@ -25,32 +25,32 @@ const PROJECTS = [
     ],
     "images": [
       "assets/img/naked-space-fever/principale.jpg",
+      "assets/img/naked-space-fever/gallery-14.jpg",
       "assets/img/naked-space-fever/gallery-01.jpg",
-      "assets/img/naked-space-fever/gallery-02.jpg",
-      "assets/img/naked-space-fever/gallery-03.jpg",
-      "assets/img/naked-space-fever/gallery-04.jpg",
+      "assets/img/naked-space-fever/gallery-16.jpg",
+      "assets/img/naked-space-fever/gallery-17.jpg",
+      "assets/img/naked-space-fever/gallery-18.jpg",
+      "assets/img/naked-space-fever/gallery-19.jpg",
+      "assets/img/naked-space-fever/gallery-15.jpg",
       "assets/img/naked-space-fever/gallery-05.jpg",
       "assets/img/naked-space-fever/gallery-06.jpg",
-      "assets/img/naked-space-fever/gallery-07.jpg",
-      "assets/img/naked-space-fever/gallery-08.jpg",
       "assets/img/naked-space-fever/gallery-09.jpg",
       "assets/img/naked-space-fever/gallery-10.jpg",
       "assets/img/naked-space-fever/gallery-11.jpg",
       "assets/img/naked-space-fever/gallery-12.jpg",
       "assets/img/naked-space-fever/gallery-13.jpg",
-      "assets/img/naked-space-fever/gallery-14.jpg",
-      "assets/img/naked-space-fever/gallery-15.jpg",
-      "assets/img/naked-space-fever/gallery-16.jpg",
-      "assets/img/naked-space-fever/gallery-17.jpg",
-      "assets/img/naked-space-fever/gallery-18.jpg",
-      "assets/img/naked-space-fever/gallery-19.jpg"
+      "assets/img/naked-space-fever/gallery-08.jpg",
+      "assets/img/naked-space-fever/gallery-02.jpg",
+      "assets/img/naked-space-fever/gallery-03.jpg",
+      "assets/img/naked-space-fever/gallery-04.jpg",
+      "assets/img/naked-space-fever/gallery-07.jpg"
     ],
     "video": null,
     "url": "work/naked-space-fever.html"
   },
   {
     "slug": "naked-space-nike",
-    "title": "NAKED SPACE × VASTO Gallery × NIKE - milano design week, Milano",
+    "title": "NAKED SPACE × VASTO Gallery × NIKE - Milano Design Week, Milano",
     "category": "production",
     "categoryLabel": "Creative Production",
     "year": "2026",
@@ -64,17 +64,17 @@ const PROJECTS = [
       "DESIGN AND PRODUCTION: NIKE Global Design, Dropcity",
       "SOUND CURATION: C2C Festival",
       "COLLABORATION: Vasto Gallery",
+      "PHOTOGRAPHY: Giulia Greco, Giulia Montelli, VastoGallery",
       "IMAGE COURTESY: NIKE, NAKED SPACE, Vasto Gallery"
     ],
     "images": [
       "assets/img/naked-space-nike/principale.jpg",
       "assets/img/naked-space-nike/gallery-01.jpg",
-      { "src": "assets/img/naked-space-nike/gallery-09.jpg", "credit": "VastoGallery" },
+      "assets/img/naked-space-nike/gallery-09.jpg",
       "assets/img/naked-space-nike/gallery-02.jpg",
-      { "src": "assets/img/naked-space-nike/gallery-06.jpg", "credit": "VastoGallery" },
-      { "src": "assets/img/naked-space-nike/gallery-07.jpg", "credit": "VastoGallery" },
-      { "src": "assets/img/naked-space-nike/gallery-03.jpg", "credit": "Giulia Greco" },
-      { "src": "assets/img/naked-space-nike/gallery-04.jpg", "credit": "Giulia Montelli" },
+      "assets/img/naked-space-nike/gallery-06.jpg",
+      "assets/img/naked-space-nike/gallery-03.jpg",
+      "assets/img/naked-space-nike/gallery-04.jpg",
       "assets/img/naked-space-nike/gallery-13.jpg"
     ],
     "video": "assets/video/naked-space-nike.mp4",
@@ -82,7 +82,7 @@ const PROJECTS = [
   },
   {
     "slug": "institutional-trip-senegal",
-    "title": "IAAC x MDEF - Research trip, Senegal",
+    "title": "IAAC x MDEF - Research Trip, Senegal",
     "category": "production",
     "categoryLabel": "Creative Production",
     "year": "2026",
@@ -117,7 +117,7 @@ const PROJECTS = [
   },
   {
     "slug": "music-video-abhir",
-    "title": "AM PM x Abhir - Glasgow, barcelona",
+    "title": "AM PM x Abhir - Glasgow, Barcelona",
     "category": "production",
     "categoryLabel": "Creative Production",
     "year": "2026",
@@ -152,7 +152,7 @@ const PROJECTS = [
   },
   {
     "slug": "mdef-festival",
-    "title": "MDEF X MDEFEST, barcelona",
+    "title": "MDEF X MDEFEST, Barcelona",
     "category": "production",
     "categoryLabel": "Creative Production",
     "year": "2025",
@@ -179,7 +179,7 @@ const PROJECTS = [
     "title": "Francesca Romana Vanti",
     "category": "product-material-research",
     "categoryLabel": "Product and Material Research",
-    "year": "2023–2024",
+    "year": "2023–2025",
     "paragraphs": [
       "Worked across the entire jewelry production process, combining traditional goldsmith techniques with digital prototyping and CAD modelling. Produced silver jewelry through lost-wax casting and handcrafted fabrication while developing production-ready digital models. Alongside product development, led the studio's visual identity redesign, including logo, printed materials and website, and supported client communication, supplier management and day-to-day workshop operations."
     ],
@@ -221,6 +221,53 @@ const PROJECTS = [
     "url": "work/material-dialogue.html"
   },
   {
+    "slug": "fungicharm-workshop",
+    "title": "Fungicharm Workshop",
+    "category": "product-material-research",
+    "categoryLabel": "Product and Material Research",
+    "year": "2025",
+    "paragraphs": [
+      "Together with Belen Comotto, I organised a workshop at Elisava aimed at introducing participants with different levels of experience to the properties and potential of mycelium. The workshop was designed around a simple question: how can a complex biological process be translated into an accessible and engaging experience? Rather than producing an object that would remain disconnected from the process, we developed a small mycelium charm that participants could take with them and use as an accessory, extending the conversation beyond the workshop itself.",
+      "Around 20 participants experimented with a mixture of mycelium and pasteurised coffee grounds, using a widely available waste material as the substrate. Participants could work with two different strains, Pleurotus and a Biokit strain, and prepare their own individual charm through a simple inoculation and moulding process.",
+      "The workshop became a way to combine material experimentation, biological processes and collective learning, making mycelium more approachable to participants while encouraging them to continue questioning the materials and processes behind everyday objects."
+    ],
+    "credits": ["Photography by Ramon Prat"],
+    "images": [
+      "assets/img/fungicharm-workshop/principale.jpg",
+      "assets/img/fungicharm-workshop/gallery-02.jpg",
+      "assets/img/fungicharm-workshop/gallery-04.jpg",
+      "assets/img/fungicharm-workshop/gallery-07.jpg",
+      "assets/img/fungicharm-workshop/gallery-13.jpg",
+      "assets/img/fungicharm-workshop/gallery-17.jpg"
+    ],
+    "video": null,
+    "url": "work/fungicharm-workshop.html"
+  },
+  {
+    "slug": "workshop-mdeffest",
+    "title": "Workshop MDEF Fest",
+    "category": "product-material-research",
+    "categoryLabel": "Product and Material Research",
+    "year": "2025",
+    "paragraphs": [
+      "As part of the MDEF Festival exhibition at Les Tres Xemeneies in Barcelona, I developed a hands-on workshop together with Belen Comotto, exploring the relationship between textiles and mycelium through a simple inoculation process.",
+      "The workshop introduced participants to the basic principles of growing mycelium on fabric, translating the biological process into an accessible, hands-on activity. Participants were guided through the inoculation of textile samples, allowing them to directly interact with the material and observe how a living organism could colonise and transform a conventional substrate.",
+      "The activity extended the research presented in the exhibition beyond observation, turning the installation into an opportunity for participation and knowledge exchange. By working directly with mycelium, participants could experience its growth as an ongoing material process rather than as a finished product.",
+      "The workshop was developed as part of the wider exhibition environment, where video, sound, biological materials and physical experimentation came together to create an immersive space for exploring relationships between living systems, materials and design."
+    ],
+    "credits": ["Photography by Ardila and Ramon Prat"],
+    "images": [
+      "assets/img/workshop-mdeffest/principale.jpg",
+      "assets/img/workshop-mdeffest/gallery-01.jpg",
+      "assets/img/workshop-mdeffest/gallery-03.jpg",
+      "assets/img/workshop-mdeffest/gallery-06.jpg",
+      "assets/img/workshop-mdeffest/gallery-07.jpg",
+      "assets/img/workshop-mdeffest/gallery-10.jpg"
+    ],
+    "video": null,
+    "url": "work/workshop-mdeffest.html"
+  },
+  {
     "slug": "b612",
     "title": "B612",
     "category": "product-material-research",
@@ -230,8 +277,8 @@ const PROJECTS = [
       "Aluminum is at the heart of a conversation between high recyclability and the complexities of extraction processes. This project explores that duality by creating a modular structure that merges two contrasting materials: red mud and recycled aluminum. Red mud, the primary byproduct of aluminum production, is incorporated into cement, forming a composite that serves as the foundation for a structure connected by components made from recycled cans.",
       "B612 aims to bridge scientific knowledge and popular awareness, promoting deeper reflection on our production and consumption practices. It's about transforming a waste material into a resource and showing how sustainability can be achieved through unexpected collaborations between materials.",
       "By delving into the properties and behaviors of these materials, this piece tells the story of their shared origins and their diametrically opposite paths. It highlights how even waste can be reimagined as an opportunity for awareness and change.",
-      "<strong>1. Red Mud Experimentation</strong><br>This study investigates the use of red mud, a by-product of the aluminium industry, as a supplementary cementitious material. The research explores how incorporating 10% red mud by weight affects the physical and mechanical properties of cement mortar, tested after 3, 7, and 28 days of curing. A 100% cement mixture was used as a reference to compare the results.",
-      "<strong>2. Aluminium Experimentation</strong><br>Alongside the mortar research, recycled aluminium from discarded cans was collected and reprocessed. The material was melted and cast into cylindrical bars, exploring how an industrial waste material could be recovered and transformed into a new functional component.",
+      "This study investigates the use of red mud, a by-product of the aluminium industry, as a supplementary cementitious material. The research explores how incorporating 10% red mud by weight affects the physical and mechanical properties of cement mortar, tested after 3, 7, and 28 days of curing. A 100% cement mixture was used as a reference to compare the results.",
+      "Alongside the mortar research, recycled aluminium from discarded cans was collected and reprocessed. The material was melted and cast into cylindrical bars, exploring how an industrial waste material could be recovered and transformed into a new functional component.",
       "B612 brings the two material experiments together in a single modular artefact. The cylindrical recycled aluminium bars connect with joints made from the developed red mud composite through a simple interlocking system, creating a stable and reconfigurable structure. Both materials originate from bauxite, creating a connection between their shared industrial origin and their new functional relationship. The modular system allows B612 to take on different spatial configurations, transforming a complex material and industrial question into a tangible object for everyday use."
     ],
     "credits": ["With the support of Francesca Romana Vanti, Stefania Manzi", "Photography by Tommaso Gabrielli"],
@@ -337,53 +384,6 @@ const PROJECTS = [
     ],
     "video": "assets/video/bone.mp4",
     "url": "work/bone.html"
-  },
-  {
-    "slug": "fungicharm-workshop",
-    "title": "Fungicharm Workshop",
-    "category": "product-material-research",
-    "categoryLabel": "Product and Material Research",
-    "year": "2025",
-    "paragraphs": [
-      "Together with Belen Comotto, I organised a workshop at Elisava aimed at introducing participants with different levels of experience to the properties and potential of mycelium. The workshop was designed around a simple question: how can a complex biological process be translated into an accessible and engaging experience? Rather than producing an object that would remain disconnected from the process, we developed a small mycelium charm that participants could take with them and use as an accessory, extending the conversation beyond the workshop itself.",
-      "Around 20 participants experimented with a mixture of mycelium and pasteurised coffee grounds, using a widely available waste material as the substrate. Participants could work with two different strains, Pleurotus and a Biokit strain, and prepare their own individual charm through a simple inoculation and moulding process.",
-      "The workshop became a way to combine material experimentation, biological processes and collective learning, making mycelium more approachable to participants while encouraging them to continue questioning the materials and processes behind everyday objects."
-    ],
-    "credits": ["Photography by Ramon Prat"],
-    "images": [
-      "assets/img/fungicharm-workshop/principale.jpg",
-      "assets/img/fungicharm-workshop/gallery-02.jpg",
-      "assets/img/fungicharm-workshop/gallery-04.jpg",
-      "assets/img/fungicharm-workshop/gallery-07.jpg",
-      "assets/img/fungicharm-workshop/gallery-13.jpg",
-      "assets/img/fungicharm-workshop/gallery-17.jpg"
-    ],
-    "video": null,
-    "url": "work/fungicharm-workshop.html"
-  },
-  {
-    "slug": "workshop-mdeffest",
-    "title": "Workshop MDEF Fest",
-    "category": "product-material-research",
-    "categoryLabel": "Product and Material Research",
-    "year": "2025",
-    "paragraphs": [
-      "As part of the MDEF Festival exhibition at Les Tres Xemeneies in Barcelona, I developed a hands-on workshop together with Belen Comotto, exploring the relationship between textiles and mycelium through a simple inoculation process.",
-      "The workshop introduced participants to the basic principles of growing mycelium on fabric, translating the biological process into an accessible, hands-on activity. Participants were guided through the inoculation of textile samples, allowing them to directly interact with the material and observe how a living organism could colonise and transform a conventional substrate.",
-      "The activity extended the research presented in the exhibition beyond observation, turning the installation into an opportunity for participation and knowledge exchange. By working directly with mycelium, participants could experience its growth as an ongoing material process rather than as a finished product.",
-      "The workshop was developed as part of the wider exhibition environment, where video, sound, biological materials and physical experimentation came together to create an immersive space for exploring relationships between living systems, materials and design."
-    ],
-    "credits": ["Photography by Ardila and Ramon Prat"],
-    "images": [
-      "assets/img/workshop-mdeffest/principale.jpg",
-      "assets/img/workshop-mdeffest/gallery-01.jpg",
-      "assets/img/workshop-mdeffest/gallery-03.jpg",
-      "assets/img/workshop-mdeffest/gallery-06.jpg",
-      "assets/img/workshop-mdeffest/gallery-07.jpg",
-      "assets/img/workshop-mdeffest/gallery-10.jpg"
-    ],
-    "video": null,
-    "url": "work/workshop-mdeffest.html"
   },
   {
     "slug": "s2026",

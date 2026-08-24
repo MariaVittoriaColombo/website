@@ -697,27 +697,6 @@ button.list-row.active .list-row-name {
   line-height: 1.55;
 }
 
-/* foto con credito fotografico individuale (es. Nike): la didascalia
-   segue subito sotto, piccola e discreta come le altre etichette
-   in stile "vecchio sistema" già usate nel sito */
-.archive-photo {
-  margin: 0 0 16px;
-  break-inside: avoid;
-}
-
-.archive-photo img {
-  margin-bottom: 4px;
-}
-
-.photo-credit {
-  display: block;
-  font-family: "PP Lettra Mono", "Courier New", monospace;
-  font-size: 10px;
-  letter-spacing: 0.03em;
-  text-transform: uppercase;
-  opacity: 0.55;
-}
-
 /* riquadro crediti: tutti i crediti del progetto (design, produzione,
    collaborazioni, foto...) raccolti in fondo alla pagina, dopo la
    galleria, invece che sparsi come una riga in cima. Stesso linguaggio

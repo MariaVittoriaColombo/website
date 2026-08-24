@@ -376,28 +376,22 @@ if (archiveList && archiveContent && typeof PROJECTS !== 'undefined') {
     const shownImages = showAll ? project.images : project.images.slice(0, MAX_IMAGES);
     const hiddenCount = project.images.length - shownImages.length;
 
-    // ogni immagine e' di norma solo una stringa (il src), ma puo'
-    // anche essere {src, credit} quando serve indicare chi ha
-    // scattato quella specifica foto (es. Nike, dove i file erano
-    // nominati con il nome del fotografo)
+    // ogni immagine e' normalmente solo una stringa (il src), ma il
+    // formato {src, ...} resta comunque supportato per compatibilità
     const imgSrc = entry => (typeof entry === 'string' ? entry : entry.src);
-    const imgCredit = entry => (typeof entry === 'string' ? null : entry.credit);
 
     // solo la primissima foto della galleria carica "eager" (e' quella
     // vicina al titolo, visibile subito); tutte le altre sono "lazy"
     // cosi' il browser non scarica decine di foto che magari non si
-    // vedranno mai (utile soprattutto sui progetti con piu' foto, es. B612)
+    // vedranno mai (utile soprattutto sui progetti con piu' foto, es. B612).
+    // i crediti fotografici non compaiono più sotto le singole foto:
+    // sono tutti raccolti nel riquadro crediti in fondo alla pagina
+    // (vedi creditsBoxHtml più sotto), anche quelli per-foto tipo
+    // Nike dove ogni scatto aveva un fotografo diverso
     function imageHtml(entry, eager) {
       const src = imgSrc(entry);
-      const credit = imgCredit(entry);
       const loadingAttr = eager ? '' : ' loading="lazy"';
-      if (!credit) return `<img src="${src}" alt=""${loadingAttr}>`;
-      return (
-        `<figure class="archive-photo">` +
-        `<img src="${src}" alt=""${loadingAttr}>` +
-        `<figcaption class="photo-credit">Photo: ${credit}</figcaption>` +
-        `</figure>`
-      );
+      return `<img src="${src}" alt=""${loadingAttr}>`;
     }
 
     // il primo paragrafo resta la descrizione generale del progetto,
