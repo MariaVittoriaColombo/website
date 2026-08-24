@@ -17,15 +17,14 @@ const isSmallViewport = window.matchMedia('(max-width: 700px)').matches;
 const dvdSpeed = isSmallViewport ? 0.18 : 1;
 const floatMargin = 4; // piccolo margine dai bordi del canvas
 
-// velocità in pixel AL SECONDO (non più "a frame"): 204/156 px/s
-// corrispondono a quella che era 3.4/2.6 px/frame su uno schermo a
-// 60Hz. Usando il tempo reale trascorso tra un frame e l'altro invece
-// di un numero fisso di pixel per frame, la velocità resta identica
-// che il device sia a 60Hz, 90Hz o 120Hz — prima invece un refresh
-// rate più alto faceva scattare requestAnimationFrame più spesso al
-// secondo, quindi la stessa foto si muoveva più veloce su quei device
-const BASE_VEL_X = 204;
-const BASE_VEL_Y = 156;
+// velocità in pixel AL SECONDO (non più "a frame"). Usando il tempo
+// reale trascorso tra un frame e l'altro invece di un numero fisso di
+// pixel per frame, la velocità resta identica che il device sia a
+// 60Hz, 90Hz o 120Hz — prima invece un refresh rate più alto faceva
+// scattare requestAnimationFrame più spesso al secondo, quindi la
+// stessa foto si muoveva più veloce su quei device
+const BASE_VEL_X = 100;
+const BASE_VEL_Y = 76;
 
 let topZ = 10;
 let activeIndex = 0;
@@ -101,26 +100,6 @@ projectBlocks.forEach((block, i) => {
   });
 });
 
-// --- DEBUG TEMPORANEO: pannellino in alto a sinistra per capire cosa
-// succede davvero nel browser di chi lo guarda. Da togliere una volta
-// risolto il problema del colore/velocità. ---
-const debugBox = document.createElement('div');
-debugBox.style.cssText = 'position:fixed;top:4px;left:4px;z-index:99999;background:#000;color:#0f0;font-family:monospace;font-size:11px;padding:6px 8px;white-space:pre;pointer-events:none;max-width:90vw;';
-debugBox.textContent = 'debug: avvio...';
-document.body.appendChild(debugBox);
-let debugBounces = 0;
-let debugFrames = 0;
-let debugSwaps = 0;
-function updateDebug(extra) {
-  debugBox.textContent =
-    `frames: ${debugFrames} | bounces: ${debugBounces} | swaps: ${debugSwaps}\n` +
-    `reducedMotion: ${prefersReducedMotion} | dvdSpeed: ${typeof dvdSpeed !== 'undefined' ? dvdSpeed : 'n/a'}\n` +
-    `manual accentColor: ${localStorage.getItem('accentColor')}\n` +
-    `accent-start: ${getComputedStyle(document.documentElement).getPropertyValue('--accent-start').trim()}\n` +
-    (extra || '');
-}
-updateDebug();
-
 if (paintCanvas && projectBlocks.length && !prefersReducedMotion) {
   showOnly(activeIndex);
 
@@ -132,8 +111,6 @@ if (paintCanvas && projectBlocks.length && !prefersReducedMotion) {
   const MAX_DELTA_MS = 50;
 
   function tick(timestamp) {
-    debugFrames++;
-    if (debugFrames % 60 === 0) updateDebug();
     if (lastTimestamp === null) lastTimestamp = timestamp;
     const deltaMs = Math.min(timestamp - lastTimestamp, MAX_DELTA_MS);
     lastTimestamp = timestamp;
@@ -179,7 +156,6 @@ if (paintCanvas && projectBlocks.length && !prefersReducedMotion) {
         active.style.top = `${posY}px`;
 
         if (bounced) {
-          debugBounces++;
           // la foto ha appena raggiunto il bordo: NON cambiamo subito.
           // Aspettiamo il prossimo frame — così il browser fa in tempo a
           // disegnare la foto esattamente lì, al bordo, prima che sparisca.
@@ -188,7 +164,6 @@ if (paintCanvas && projectBlocks.length && !prefersReducedMotion) {
           // aggiornamenti in un solo repaint e l'occhio non vedrebbe mai
           // la foto arrivare davvero al bordo — sembrerebbe cambiare prima.
           requestAnimationFrame(() => {
-            debugSwaps++;
             activeIndex = (activeIndex + 1) % projectBlocks.length;
             showOnly(activeIndex);
             const next = projectBlocks[activeIndex];
@@ -202,7 +177,6 @@ if (paintCanvas && projectBlocks.length && !prefersReducedMotion) {
             if (typeof onBounceChangeAccent === 'function') {
               onBounceChangeAccent();
             }
-            updateDebug(`ultimo swap: frame ${debugFrames}`);
           });
         }
       }

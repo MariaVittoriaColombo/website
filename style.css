@@ -1026,12 +1026,15 @@ button.list-row.active .list-row-name {
 
   /* le foto della bacheca hanno dimensioni fisse in px pensate
      per un canvas largo: su mobile le limitiamo perché non
-     escano dal riquadro */
+     escano dal riquadro. Più piccole del canvas rispetto al
+     desktop, cosi' hanno più spazio per muoversi prima di
+     toccare un bordo: rimbalzando meno spesso il movimento
+     sembra più fluido e meno "a scatti" */
   .project-block .swatch {
     width: auto !important;
     height: auto !important;
-    max-width: 42vw !important;
-    max-height: 24vh !important;
+    max-width: 32vw !important;
+    max-height: 18vh !important;
   }
 
   .paint-palette button {
