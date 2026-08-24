@@ -110,6 +110,18 @@ if (paintCanvas && projectBlocks.length && !prefersReducedMotion) {
   // un salto gigante (e diverso ad ogni device) appena il tab torna attivo
   const MAX_DELTA_MS = 50;
 
+  // quando la foto arriva vicino a un angolo, capita che il bordo
+  // orizzontale e quello verticale vengano toccati in due frame diversi
+  // ma vicinissimi tra loro (pochi millisecondi), invece che
+  // esattamente nello stesso istante: senza un minimo di pausa questo
+  // genera due cambi foto/colore quasi in contemporanea, che sembra un
+  // glitch. Il rimbalzo fisico (l'inversione della velocità) resta
+  // sempre corretto su ogni bordo toccato; è solo il cambio
+  // foto/colore ad aspettare questo intervallo minimo tra un cambio e
+  // l'altro.
+  const SWAP_COOLDOWN_MS = 400;
+  let lastSwapTimestamp = -Infinity;
+
   function tick(timestamp) {
     if (lastTimestamp === null) lastTimestamp = timestamp;
     const deltaMs = Math.min(timestamp - lastTimestamp, MAX_DELTA_MS);
@@ -155,7 +167,8 @@ if (paintCanvas && projectBlocks.length && !prefersReducedMotion) {
         active.style.left = `${posX}px`;
         active.style.top = `${posY}px`;
 
-        if (bounced) {
+        if (bounced && (timestamp - lastSwapTimestamp) >= SWAP_COOLDOWN_MS) {
+          lastSwapTimestamp = timestamp;
           // la foto ha appena raggiunto il bordo: NON cambiamo subito.
           // Aspettiamo il prossimo frame — così il browser fa in tempo a
           // disegnare la foto esattamente lì, al bordo, prima che sparisca.
