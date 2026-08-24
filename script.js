@@ -14,7 +14,7 @@ const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)
 // foto rimbalzerebbe da un bordo all'altro troppo in fretta, quindi
 // rallentiamo il movimento sotto i 700px
 const isSmallViewport = window.matchMedia('(max-width: 700px)').matches;
-const dvdSpeed = isSmallViewport ? 0.18 : 1;
+const dvdSpeed = isSmallViewport ? 0.28 : 1;
 const floatMargin = 4; // piccolo margine dai bordi del canvas
 
 // velocità in pixel AL SECONDO (non più "a frame"). Usando il tempo
