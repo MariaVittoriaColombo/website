@@ -231,7 +231,7 @@ const PROJECTS = [
       "Around 20 participants experimented with a mixture of mycelium and pasteurised coffee grounds, using a widely available waste material as the substrate. Participants could work with two different strains, Pleurotus and a Biokit strain, and prepare their own individual charm through a simple inoculation and moulding process.",
       "The workshop became a way to combine material experimentation, biological processes and collective learning, making mycelium more approachable to participants while encouraging them to continue questioning the materials and processes behind everyday objects."
     ],
-    "credits": ["Photography by Ramon Prat"],
+    "credits": ["In collaboration with Belen Comotto", "Photography by Ramon Prat"],
     "images": [
       "assets/img/fungicharm-workshop/principale.jpg",
       "assets/img/fungicharm-workshop/gallery-02.jpg",
@@ -255,7 +255,7 @@ const PROJECTS = [
       "The activity extended the research presented in the exhibition beyond observation, turning the installation into an opportunity for participation and knowledge exchange. By working directly with mycelium, participants could experience its growth as an ongoing material process rather than as a finished product.",
       "The workshop was developed as part of the wider exhibition environment, where video, sound, biological materials and physical experimentation came together to create an immersive space for exploring relationships between living systems, materials and design."
     ],
-    "credits": ["Photography by Ardila and Ramon Prat"],
+    "credits": ["In collaboration with Belen Comotto", "Photography by Ardila and Ramon Prat"],
     "images": [
       "assets/img/workshop-mdeffest/principale.jpg",
       "assets/img/workshop-mdeffest/gallery-01.jpg",
