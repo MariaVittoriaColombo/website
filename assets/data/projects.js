@@ -144,7 +144,8 @@ const PROJECTS = [
     "images": [
       "assets/img/music-video-abhir/principale.jpg",
       "assets/img/music-video-abhir/gallery-01.jpg",
-      "assets/img/music-video-abhir/gallery-02.jpg"
+      "assets/img/music-video-abhir/gallery-03.jpg",
+      "assets/img/music-video-abhir/gallery-04.jpg"
     ],
     "video": "https://youtu.be/9EEgjYCO5xk?si=UdoPgRiFAw_ijBdL",
     "url": "work/music-video-abhir.html"
